@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class AcceptString {
@@ -20,6 +22,17 @@ public class AcceptString {
 		Scanner in = new Scanner (System.in);
 		String str=in.nextLine();
 		System.out.println("You entered string "+str);
+	}
+	
+	public void acceptFile() throws FileNotFoundException {
+		File file = new File("C:\\Users\\vikto\\git\\BasicTraining\\com.basic.training.main\\testString");
+		Scanner sc = new Scanner(file);
+		
+		while (sc.hasNextLine())
+		{
+			System.out.println(sc.nextLine());
+						
+		}
 	}
 	
 
