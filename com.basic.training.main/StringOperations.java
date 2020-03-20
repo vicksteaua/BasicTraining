@@ -36,5 +36,10 @@ public class StringOperations {
 		}
 		return fin;
 	}
+	
+	public String reduceStringChars(String str, int first, int last)
+	{
+		return str.substring(0, first)+str.substring(last, str.length());
+	}
 		
 }
