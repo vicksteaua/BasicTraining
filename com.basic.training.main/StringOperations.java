@@ -10,5 +10,31 @@ public class StringOperations {
 		}
 		return count;
 	}
+	
+	public String revertStringChars(String str)
+	{
+		String rev="";
+		for(int i=str.length()-1;i>=0;i--)
+			rev+=str.charAt(i);
+		return rev;
+	}
+	
+	public String addStringChars(String str, String add, int pos)
+	{
+		String fin="";
+		for(int i=0;i<str.length();i++)
+		{
+			if (pos==str.length()) {
+							
+				fin=str+add;
+				break;
+			}
+			if(i==pos)
+				fin+=add;
+			fin+=str.charAt(i);
+							
+		}
+		return fin;
+	}
 		
 }
