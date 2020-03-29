@@ -1,5 +1,11 @@
 package com.basic.training;
 
+import static com.jcabi.matchers.RegexMatchers.matchesPattern;
+import static org.junit.Assert.assertThat;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringOperations {
 
 	public int countStringChars(String str) {
@@ -42,5 +48,16 @@ public class StringOperations {
 		sb.append(newString);
 		return sb.toString();
 	}
-
+	
+	public void regEx(String str1, String str2)
+	{
+		try {
+			assertThat(str1, matchesPattern(str2));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
 }
