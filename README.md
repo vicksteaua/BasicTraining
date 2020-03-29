@@ -15,4 +15,3 @@ accepta un string din:
 8.Parse and Remove 
 9.Extract numbers, convert to int
 10.Extract date and print
-11.
