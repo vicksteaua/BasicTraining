@@ -1,3 +1,4 @@
+package com.basic.training;
 import java.io.FileNotFoundException;
 
 public class Main {
@@ -15,7 +16,7 @@ public class Main {
 		System.out.println(b.revertStringChars(str1));
 		System.out.println(b.addStringChars(str1, "tt1",1));
 		System.out.println(b.reduceStringChars(str1, 0, 1));
-
+		
 	}
 
 }
