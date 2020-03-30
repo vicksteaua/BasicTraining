@@ -1,10 +1,11 @@
 package com.basic.training;
 
 import static com.jcabi.matchers.RegexMatchers.matchesPattern;
-import static org.junit.Assert.assertThat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.hamcrest.MatcherAssert;
 
 public class StringOperations {
 
@@ -49,14 +50,27 @@ public class StringOperations {
 		return sb.toString();
 	}
 	
-	public void regEx(String str1, String str2)
-	{
-		try {
-			assertThat(str1, matchesPattern(str2));
-		} catch (Exception e) {
+	public String regEx(String str1, String str2)
+	{	
+			String s = "";
+			if(NullOrEmptySingleton.isNullOrEmpty(str1)||NullOrEmptySingleton.isNullOrEmpty(str2))
+					System.out.println("The string is null or empty.");
 			
-			e.printStackTrace();
-		}
+			Pattern p = Pattern.compile(str1);
+			Matcher m =p.matcher(str2);
+			while (m.find()) {
+	            System.out.print("Start index: " + m.start());
+	            System.out.print(" End index: " + m.end() + " ");
+	            System.out.println(" - " + m.group());
+	             return s+=m.group();
+			 
+			}
+			
+			
+		
+			
+			
+		
 		
 	}
 	
