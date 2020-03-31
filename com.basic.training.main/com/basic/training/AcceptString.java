@@ -1,3 +1,4 @@
+package com.basic.training;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,7 +11,6 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AcceptString {
@@ -62,6 +62,7 @@ public class AcceptString {
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener(){
 
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = textfield.getText();
 				System.out.println("Input");
