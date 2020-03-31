@@ -1,14 +1,17 @@
 Git Steps for new branch :
 	1. https://github.com/vicksteaua/BasicTraining
 	2. Be sure that you are on master
-		2.1 [LEAR-8] +name 
+		2.1 feature/1.0.0/lear-8  
 	3. eclipse git perspect.  right click repository->pull
 	4.basic training->branches->remote tracking  
 		right click on the new branch->
 		checkout as a new local branch
 	5.after finishing development for the current feature, 
-		branches->local   
-		checkout master-> merge + branch containing changes
+		-branches->local   
+		-checkout master->
+		-right click on master
+		 -merge 
+		 -select the local branch containing changes
 		+ commit&push
 	6. delete local branch
 	
