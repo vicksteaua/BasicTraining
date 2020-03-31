@@ -4,7 +4,8 @@ import java.io.FileNotFoundException;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String str1="ab";
+		String str1="abcd";
+		String str2="eabcde";
 		//AcceptString a=new AcceptString(str);
 		//System.out.println(a.getStr());
 		//a.acceptConsole();
@@ -12,10 +13,11 @@ public class Main {
 		//a.acceptGUI();
 		
 		StringOperations b=new StringOperations();
-		System.out.println(b.countStringChars(str1));
-		System.out.println(b.revertStringChars(str1));
-		System.out.println(b.addStringChars(str1, "tt1",1));
-		System.out.println(b.reduceStringChars(str1, 0, 1));
+//		System.out.println(b.countStringChars(str1));
+//		System.out.println(b.revertStringChars(str1));
+//		System.out.println(b.addStringChars(str1, "tt1",1));
+//		System.out.println(b.reduceStringChars(str1, 0, 1));
+		b.regEx(str1,str2);
 		
 	}
 
