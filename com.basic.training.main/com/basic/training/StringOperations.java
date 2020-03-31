@@ -2,6 +2,10 @@ package com.basic.training;
 
 import static com.jcabi.matchers.RegexMatchers.matchesPattern;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,29 +53,39 @@ public class StringOperations {
 		sb.append(newString);
 		return sb.toString();
 	}
-	
-	public String regEx(String str1, String str2)
-	{	
-			String s = "";
-			if(NullOrEmptySingleton.isNullOrEmpty(str1)||NullOrEmptySingleton.isNullOrEmpty(str2))
-					System.out.println("The string is null or empty.");
-			
-			Pattern p = Pattern.compile(str1);
-			Matcher m =p.matcher(str2);
-			while (m.find()) {
-	            System.out.print("Start index: " + m.start());
-	            System.out.print(" End index: " + m.end() + " ");
-	            System.out.println(" - " + m.group());
-	             return s+=m.group();
-			 
-			}
-			
-			
-		
-			
-			
-		
-		
+
+	public String regEx(String inputString, String regExpression) {
+		String s = "";
+		if (NullOrEmptySingleton.isNullOrEmpty(inputString) || NullOrEmptySingleton.isNullOrEmpty(regExpression))
+			System.out.println("The string is null or empty.");
+
+		Pattern p = Pattern.compile(regExpression);
+		Matcher m = p.matcher(inputString);
+		while (m.find()) {
+			System.out.print("Start index: " + m.start());
+			System.out.print(" End index: " + m.end() + " ");
+			System.out.println(" - " + m.group());
+			s += m.group();
+
+		}
+		System.out.println(s);
+		return s;
+
 	}
-	
+
+	public List<String> convertStringToArrayList(String InputString) {
+
+		List<String> inp = new ArrayList<String>();
+		inp.add(InputString);
+
+		for (int i = 0; i < InputString.length(); i++) {
+
+			if (InputString.charAt(i) == ' ')
+				i++;
+		}
+
+		return inp;
+
+	}
+
 }
