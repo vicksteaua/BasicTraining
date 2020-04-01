@@ -1,19 +1,33 @@
 package com.basic.training.test;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.basic.training.StringOperations;
+import com.basic.training.exceptions.NullInputException;
 
 public class RegExTest {
 
-//	@Test
-//	public void regExNullTest() {
-//		StringOperations stringOperations = new StringOperations();
-//		assert
-//	}
+	@Test
+	public void regExNullTest() {
+		StringOperations stringOperations = new StringOperations();
+		Assertions.assertThrows(NullInputException.class, () -> stringOperations.regEx(null, null));
+	}
+	
+	@Test
+	public void regExNullTestWithException() {
+		StringOperations stringOperations = new StringOperations();
+		String regExResult= "";
+		try {
+			regExResult = stringOperations.regEx(null, null);
+		} catch (NullInputException e) {
+		}
+		
+		assertEquals("", regExResult);
+	}
 
 	@Test
 	public void regExLowerCaseTest() {		
@@ -27,13 +41,27 @@ public class RegExTest {
 				"";
 		String expectedOutput="RegExrMediaTempleEditExpressionTextRollPCREJavaScriptRegExValidateTestsTheCheatsheetReferenceHelpYouSaveShareCommunityMyPatternsExploreToolsReplaceListDetailsExplainEnglish";
 		StringOperations stringOperations = new StringOperations();
-		assertEquals(expectedOutput,stringOperations.regEx(testString,"(([A-Z])\\w+)"));
+		
+		String regExResult = null;
+		try {
+			regExResult = stringOperations.regEx(testString,"(([A-Z])\\w+)");
+		} catch (NullInputException e) {
+			fail(e.getMessage()); 
+		}
+		
+		assertEquals(expectedOutput,regExResult);
 	}
 	
 	@Test
 	public void regExUpperCaseTest() {		
 		StringOperations stringOperations = new StringOperations();
-		String result = stringOperations.regEx("ABCD","([A-Z]+$)");
+		String result=null;
+		try {
+			result = stringOperations.regEx("ABCD","([A-Z]+$)");
+		} catch (NullInputException e) {
+		
+			fail(e.getMessage());
+		}
 		assertEquals("ABCD", result);
 	}
 	

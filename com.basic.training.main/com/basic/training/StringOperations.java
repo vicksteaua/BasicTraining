@@ -1,15 +1,11 @@
 package com.basic.training;
 
-import static com.jcabi.matchers.RegexMatchers.matchesPattern;
-
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hamcrest.MatcherAssert;
+import com.basic.training.exceptions.NullInputException;
 
 public class StringOperations {
 
@@ -54,10 +50,14 @@ public class StringOperations {
 		return sb.toString();
 	}
 
-	public String regEx(String inputString, String regExpression) {
+	public String regEx(String inputString, String regExpression) throws NullInputException {
 		String s = "";
-		if (NullOrEmptySingleton.isNullOrEmpty(inputString) || NullOrEmptySingleton.isNullOrEmpty(regExpression))
+		if (NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString) ||
+				NullOrEmptySingleton.getInstance().isNullOrEmpty(regExpression)) {
 			System.out.println("The string is null or empty.");
+			
+			throw new NullInputException();
+		}
 
 		Pattern p = Pattern.compile(regExpression);
 		Matcher m = p.matcher(inputString);
@@ -73,15 +73,26 @@ public class StringOperations {
 
 	}
 
-	public List<String> convertStringToArrayList(String InputString) {
+	public List<String> convertStringToArrayList(String inputString) throws NullInputException {
+	if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString))
+	{
+		throw new NullInputException();
+	}
+		List<String> inp = new ArrayList<>();
+		String word = "";
+		inputString = inputString.trim();
+		for (int i = 0; i < inputString.length(); i++) {
 
-		List<String> inp = new ArrayList<String>();
-		inp.add(InputString);
-
-		for (int i = 0; i < InputString.length(); i++) {
-
-			if (InputString.charAt(i) == ' ')
-				i++;
+			char currentChar = inputString.charAt(i);
+			if (currentChar != ' ') {
+				word += currentChar;
+				if (i == inputString.length()-1) {
+					inp.add(word);
+				}
+			} else if (currentChar == ' ' && word != "") {
+				inp.add(word);
+				word = "";
+			}
 		}
 
 		return inp;
