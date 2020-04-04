@@ -1,13 +1,16 @@
 package com.basic.training;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.basic.training.exceptions.NullInputException;
+import com.basic.training.exceptions.RomanAlphabetException;
 
-public class StringOperations {
+public class StringOperations implements AbstractListExtractWords {
 
 	public int countStringChars(String str) {
 		int count = 0;
@@ -65,12 +68,32 @@ public class StringOperations {
 			System.out.print("Start index: " + m.start());
 			System.out.print(" End index: " + m.end() + " ");
 			System.out.println(" - " + m.group());
-			s += m.group();
+			s += m.group()+" ";
 
 		}
 		System.out.println(s);
 		return s;
 
+	}
+	
+	public List<String> extractWords(String model){
+		List<String> l = Collections.emptyList();
+		String word = "";
+		model = model.trim();
+		for (int i = 0; i < model.length(); i++) {
+
+			char currentChar = model.charAt(i);
+			if (currentChar != ' ') {
+				word += currentChar;
+				if (i == model.length()-1) {
+					l.add(word);
+				}
+			} else if (currentChar == ' ' && word != "") {
+				l.add(word);
+				word = "";
+			}
+		}
+		return l;
 	}
 
 	public List<String> convertStringToArrayList(String inputString) throws NullInputException {
@@ -79,6 +102,34 @@ public class StringOperations {
 		throw new NullInputException();
 	}
 		List<String> inp = new ArrayList<>();
+		Collections.addAll(inp=new ArrayList<String>(), this.extractWords(inputString).toString());
+	//	this.extractWords(inputString);
+//		String word = "";
+//		inputString = inputString.trim();
+//		for (int i = 0; i < inputString.length(); i++) {
+//
+//			char currentChar = inputString.charAt(i);
+//			if (currentChar != ' ') {
+//				word += currentChar;
+//				if (i == inputString.length()-1) {
+//					inp.add(word);
+//				}
+//			} else if (currentChar == ' ' && word != "") {
+//				inp.add(word);
+//				word = "";
+//			}
+//		}
+
+		return inp;
+
+	}
+	
+	public List<String> convertStringToLinkedList(String inputString) throws NullInputException {
+		if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString))
+		{
+			throw new NullInputException();
+		}
+		List<String> inp= new LinkedList<>();
 		String word = "";
 		inputString = inputString.trim();
 		for (int i = 0; i < inputString.length(); i++) {
@@ -96,7 +147,22 @@ public class StringOperations {
 		}
 
 		return inp;
-
+		
 	}
+	
+	public String extractWordsFromRegEx(String inputString,String regex) throws NullInputException, RomanAlphabetException {
+		if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString)||NullOrEmptySingleton.getInstance().isNullOrEmpty(regex))
+		{
+			throw new NullInputException();
+		}
+		if (regex.matches("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"))
+		{
+			throw new RomanAlphabetException();
+		}
+			
+		return regEx(inputString,regex);
+		
+	}
+	
 
 }
