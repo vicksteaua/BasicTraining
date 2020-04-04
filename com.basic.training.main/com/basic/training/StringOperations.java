@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.lang.Character;
+
 import org.hamcrest.MatcherAssert;
 
 public class StringOperations {
@@ -89,23 +91,39 @@ public class StringOperations {
 	}
 
 	public String removeExtraSpaces(String inputString) {
-		inputString=inputString.trim();
+		inputString = inputString.trim();
 		String cuvant = "";
 		for (int i = 0; i < inputString.length(); i++) {
-			if (inputString.charAt(i) != ' ' && i != inputString.length() ) {
+			if (inputString.charAt(i) != ' ' && i != inputString.length()) {
 				cuvant += inputString.charAt(i);
 			} else if (inputString.charAt(i) == ' ') {
 				if (inputString.charAt(i + 1) == ' ') {
 					cuvant += inputString.charAt(i);
 					i++;
 				}
-				cuvant+=inputString.charAt(i);
+				cuvant += inputString.charAt(i);
+			}
+
+		}
+
+		return cuvant;
+	}
+	
+	public List<Integer> extractIntegers(String inputString) {
+		int result=0;
+		List<Integer> lint=new ArrayList<>();
+		for(int i=0;i<inputString.length();i++) {
+			if(inputString.charAt(i)>='0'&&inputString.charAt(i)<='9') {
+				if (Character.isDigit(inputString.charAt(i))) {
+					result=Character.getNumericValue(inputString.charAt(i));
+					lint.add(result);
+				}
 			}
 			
 		}
 		
-
-		return cuvant;
+		
+		return lint;
 	}
 
 }
