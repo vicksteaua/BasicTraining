@@ -88,4 +88,24 @@ public class StringOperations {
 
 	}
 
+	public String removeExtraSpaces(String inputString) {
+		inputString=inputString.trim();
+		String cuvant = "";
+		for (int i = 0; i < inputString.length(); i++) {
+			if (inputString.charAt(i) != ' ' && i != inputString.length() ) {
+				cuvant += inputString.charAt(i);
+			} else if (inputString.charAt(i) == ' ') {
+				if (inputString.charAt(i + 1) == ' ') {
+					cuvant += inputString.charAt(i);
+					i++;
+				}
+				cuvant+=inputString.charAt(i);
+			}
+			
+		}
+		
+
+		return cuvant;
+	}
+
 }

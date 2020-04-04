@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		String str1="abcd";
 		String str2="[a-z]*";
-		String str3= "abcd efgh asdsa redsa";
+		String str3= "       efgh asdsa redsa       ";
 		//AcceptString a=new AcceptString(str);
 		//System.out.println(a.getStr());
 		//a.acceptConsole();
@@ -20,7 +20,7 @@ public class Main {
 //		System.out.println(b.reduceStringChars(str1, 0, 1));
 		//b.regEx(str1,str2);
 		System.out.println(b.convertStringToArrayList(str3));
-		
+		System.out.println(b.removeExtraSpaces(str3));
 	}
 
 }
