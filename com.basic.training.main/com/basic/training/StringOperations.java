@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import java.lang.Character;
+import java.time.LocalDate;
 
 import org.hamcrest.MatcherAssert;
 
@@ -108,22 +109,28 @@ public class StringOperations {
 
 		return cuvant;
 	}
-	
+
 	public List<Integer> extractIntegers(String inputString) {
-		int result=0;
-		List<Integer> lint=new ArrayList<>();
-		for(int i=0;i<inputString.length();i++) {
-			if(inputString.charAt(i)>='0'&&inputString.charAt(i)<='9') {
+		int result = 0;
+		List<Integer> lint = new ArrayList<>();
+		for (int i = 0; i < inputString.length(); i++) {
+			if (inputString.charAt(i) >= '0' && inputString.charAt(i) <= '9') {
 				if (Character.isDigit(inputString.charAt(i))) {
-					result=Character.getNumericValue(inputString.charAt(i));
+					result = Character.getNumericValue(inputString.charAt(i));
 					lint.add(result);
 				}
 			}
-			
+
 		}
-		
-		
+
 		return lint;
+	}
+
+	public LocalDate extractDatesFromString(String ddate, String regEx) {
+		String rr = this.regEx(ddate, regEx);
+		LocalDate date = LocalDate.parse(rr);
+		return date;
+
 	}
 
 }
