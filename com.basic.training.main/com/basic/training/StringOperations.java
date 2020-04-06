@@ -1,20 +1,23 @@
 package com.basic.training;
 
-import static com.jcabi.matchers.RegexMatchers.matchesPattern;
-
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+<<<<<<< HEAD
 import java.lang.Character;
 import java.time.LocalDate;
 
 import org.hamcrest.MatcherAssert;
+=======
+import com.basic.training.exceptions.NullInputException;
+import com.basic.training.exceptions.RomanAlphabetException;
+>>>>>>> refs/heads/LEAR-9-InputStringToArrayList
 
-public class StringOperations {
+public class StringOperations implements AbstractListExtractWords {
 
 	public int countStringChars(String str) {
 		int count = 0;
@@ -57,10 +60,14 @@ public class StringOperations {
 		return sb.toString();
 	}
 
-	public String regEx(String inputString, String regExpression) {
+	public String regEx(String inputString, String regExpression) throws NullInputException {
 		String s = "";
-		if (NullOrEmptySingleton.isNullOrEmpty(inputString) || NullOrEmptySingleton.isNullOrEmpty(regExpression))
+		if (NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString) ||
+				NullOrEmptySingleton.getInstance().isNullOrEmpty(regExpression)) {
 			System.out.println("The string is null or empty.");
+			
+			throw new NullInputException();
+		}
 
 		Pattern p = Pattern.compile(regExpression);
 		Matcher m = p.matcher(inputString);
@@ -68,28 +75,102 @@ public class StringOperations {
 			System.out.print("Start index: " + m.start());
 			System.out.print(" End index: " + m.end() + " ");
 			System.out.println(" - " + m.group());
-			s += m.group();
+			s += m.group()+" ";
 
 		}
 		System.out.println(s);
 		return s;
 
 	}
+	
+	public List<String> extractWords(String model){
+		List<String> l = Collections.emptyList();
+		String word = "";
+		model = model.trim();
+		for (int i = 0; i < model.length(); i++) {
 
-	public List<String> convertStringToArrayList(String InputString) {
-
-		List<String> inp = new ArrayList<String>();
-		inp.add(InputString);
-
-		for (int i = 0; i < InputString.length(); i++) {
-
-			if (InputString.charAt(i) == ' ')
-				i++;
+			char currentChar = model.charAt(i);
+			if (currentChar != ' ') {
+				word += currentChar;
+				if (i == model.length()-1) {
+					l.add(word);
+				}
+			} else if (currentChar == ' ' && word != "") {
+				l.add(word);
+				word = "";
+			}
 		}
+		return l;
+	}
+
+	public List<String> convertStringToArrayList(String inputString) throws NullInputException {
+	if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString))
+	{
+		throw new NullInputException();
+	}
+		List<String> inp = new ArrayList<>();
+		Collections.addAll(inp=new ArrayList<String>(), this.extractWords(inputString).toString());
+	//	this.extractWords(inputString);
+//		String word = "";
+//		inputString = inputString.trim();
+//		for (int i = 0; i < inputString.length(); i++) {
+//
+//			char currentChar = inputString.charAt(i);
+//			if (currentChar != ' ') {
+//				word += currentChar;
+//				if (i == inputString.length()-1) {
+//					inp.add(word);
+//				}
+//			} else if (currentChar == ' ' && word != "") {
+//				inp.add(word);
+//				word = "";
+//			}
+//		}
 
 		return inp;
 
 	}
+	
+	public List<String> convertStringToLinkedList(String inputString) throws NullInputException {
+		if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString))
+		{
+			throw new NullInputException();
+		}
+		List<String> inp= new LinkedList<>();
+		String word = "";
+		inputString = inputString.trim();
+		for (int i = 0; i < inputString.length(); i++) {
+
+			char currentChar = inputString.charAt(i);
+			if (currentChar != ' ') {
+				word += currentChar;
+				if (i == inputString.length()-1) {
+					inp.add(word);
+				}
+			} else if (currentChar == ' ' && word != "") {
+				inp.add(word);
+				word = "";
+			}
+		}
+
+		return inp;
+		
+	}
+	
+	public String extractWordsFromRegEx(String inputString,String regex) throws NullInputException, RomanAlphabetException {
+		if(	NullOrEmptySingleton.getInstance().isNullOrEmpty(inputString)||NullOrEmptySingleton.getInstance().isNullOrEmpty(regex))
+		{
+			throw new NullInputException();
+		}
+		if (regex.matches("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$"))
+		{
+			throw new RomanAlphabetException();
+		}
+			
+		return regEx(inputString,regex);
+		
+	}
+	
 
 	public String removeExtraSpaces(String inputString) {
 		inputString = inputString.trim();
