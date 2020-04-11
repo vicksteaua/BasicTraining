@@ -7,15 +7,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-<<<<<<< HEAD
+
 import java.lang.Character;
 import java.time.LocalDate;
 
-import org.hamcrest.MatcherAssert;
-=======
 import com.basic.training.exceptions.NullInputException;
 import com.basic.training.exceptions.RomanAlphabetException;
->>>>>>> refs/heads/LEAR-9-InputStringToArrayList
+
 
 public class StringOperations implements AbstractListExtractWords {
 
@@ -207,7 +205,7 @@ public class StringOperations implements AbstractListExtractWords {
 		return lint;
 	}
 
-	public LocalDate extractDatesFromString(String ddate, String regEx) {
+	public LocalDate extractDatesFromString(String ddate, String regEx) throws NullInputException {
 		String rr = this.regEx(ddate, regEx);
 		LocalDate date = LocalDate.parse(rr);
 		return date;
