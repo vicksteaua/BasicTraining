@@ -2,13 +2,18 @@ package com.basic.training;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.basic.training.exceptions.NullInputException;
 import com.basic.training.exceptions.RomanAlphabetException;
+import com.google.common.base.Joiner;
 
 public class StringOperations implements AbstractListExtractWords {
 
@@ -161,6 +166,25 @@ public class StringOperations implements AbstractListExtractWords {
 		}
 			
 		return regEx(inputString,regex);
+		
+	}
+	
+	
+	public String hashMapString(Map<String,Integer> userInput) {
+		
+		final Map<String, Integer> sortedByCount = userInput.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		
+		String s = "";
+
+		for (String k : sortedByCount.keySet()) {
+			s += k + " ";
+		}
+
+		return s;
+		
 		
 	}
 	
